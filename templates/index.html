@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="..\static\bootstrap-switch.js?v=1.1"></script>
+	<link href="..\static\bootstrap-switch.css?v=1.1" rel="stylesheet">
+	<script type="text/javascript" src="..\static\fields.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet"> 
+	<link rel="stylesheet" href="..\static\style.css">
+	<meta http-equiv=”Pragma” content=”no-cache”>
+	<meta http-equiv=”Expires” content=”-1″>
+	<meta http-equiv=”CACHE-CONTROL” content=”NO-CACHE”>
+	<meta charset="utf-8">
+</head>
+
+<body onload="startup()">
+	<div class="topper">
+		<div class="lefttop">
+			<p>MovePy</p>
+		</div>
+		<div class="top">
+			<p>Source on GitHub</p>
+		</div>
+	</div>
+
+	<div class="sidebar">
+		<div class="status">
+			<svg height="25" width="25">
+			<circle cx="12" cy="12" r="12" stroke="black" stroke-width="1" fill=
+			{% if status['status'] == "on" %}
+			"lime"
+			{% elif status['status'] == "off" %}
+			"red"
+			{% endif %}
+			/>
+			</svg>
+
+			<p>
+			{% if status['status'] == "on" %}
+			Active
+			{% elif status['status'] == "off" %}
+			Inactive
+			{% endif %}
+			</p>
+		</div>
+		<ul>
+			<li><a href="">Configuration</a></li>
+			<li><a href="/log">Log</a></li>
+		</ul>
+	</div>
+
+	<div class="contentspace">
+		<form action="" method="post">
+		<div class="content">
+			<table class="table">
+				<tr>
+					<th>SETTINGS</th>
+					<th>VALUES</th>
+				</tr>
+				{% for item in settings %}
+				<tr>
+					<td> {{item}} </td>
+					<td> 
+						<input name={{item}} type="text" value=
+						"{{settings[item]}}"
+						/>
+					</td>
+				</tr>		
+				{% endfor %}
+			</table>
+		</div>
+		<div class="content2 tablel">
+			<table id="thetable" class="table">
+				<tbody id="ruletable">
+				<tr>
+					<th>EXTENSION</th>
+					<th>DEST. FOLDER</th>
+				</tr>
+				{% for item in rules %}
+				<tr id=row{{loop.index}}>
+					<td> <input type="text" name="ext{{loop.index}}" value= "{{item}}"/> </td>
+					<td> 
+						<input type="text" name="rule{{loop.index}}" value=
+						"{{rules[item]}}"" 
+						/>
+					</td>
+					<td>
+						<button class="btn btn-link" onclick="removeRule({{loop.index}})">Remove</button>
+					</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<div style="text-align: center;">
+			<input type="button" class="btn btn-default" value="Add Rule" onclick="addRule({{ruleslength}});"/>
+			</div>
+		</div>
+		<div class="bottomdiv">
+			<br><br><br><br><br><br>
+			<table class="table">
+				<tr>
+					<td><p>Script:&nbsp&nbsp&nbsp&nbsp<input 
+						{% if status['status'] == "on" %}
+						checked 
+						{% endif%}
+						name="my-checkbox" value="stat" type="checkbox"></p></td>
+					<td><input type="submit" class="btn btn-default" value="Save All"/></td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+	</div>
+</body>
+</html>
