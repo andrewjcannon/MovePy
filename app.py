@@ -1,9 +1,9 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import main
 import configparser
-
+from threading import Thread
 app = Flask(__name__)
-app.debug=True
+#app.debug=True
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -66,5 +66,5 @@ def static_from_root():
     return render_template("log.html", content=content)
     
 if __name__ == "__main__":
-    main.worker_function()
+    Thread(target=main.worker_function).start()
     app.run(host='127.0.0.1', port=7259)
