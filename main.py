@@ -19,7 +19,7 @@ def worker_function():
             status = config['STATUS']
 
             if status['status'] == "off":
-                break
+                continue
             
             #if loop false, run once
             #if loop true, continue to run until set false
