@@ -1,4 +1,4 @@
-# web-sorter
+# MovePy
 
 Program that can be used to periodically sort files in a directory into multiple sub-folders based on file type. Web-sorter runs a Flask web server to serve the user interface and settings of the app. All settings are also customizable via a .ini file.
 
